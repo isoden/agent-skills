@@ -86,5 +86,5 @@ docs are collected in [references/further-reading.md](./references/further-readi
   why user-resemblance beats internal-state assertions.
 - **Out of scope (delegated to `eslint-plugin-testing-library`):** anything a linter
   can decide from syntax alone — awaiting async queries, `screen` usage,
-  `findBy` vs `waitFor`+`getBy`, `no-container`, `no-node-access`, `prefer-user-event`,
+  `findBy` vs `waitFor`+`getBy`, not reaching into the DOM, `fireEvent`-vs-`user-event`,
   debug leftovers, naming conventions. Recommend the plugin; don't re-teach its rules.

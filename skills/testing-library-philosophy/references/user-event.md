@@ -67,7 +67,7 @@ await user.type(screen.getByRole('searchbox'), 'cat')
 ## Judgment, not mechanics
 
 The deterministic part — "prefer `user-event` over `fireEvent`" — is enforced by the
-linter (`prefer-user-event`), so don't spend prose arguing the swap. The judgment
+linter, so don't spend prose arguing the swap. The judgment
 this reference is about is *fidelity*: model the actual interaction a user performs
 (including the small realistic steps — focus before type, hover before a tooltip,
 the full click sequence) so that when the test passes, you know the behavior holds

@@ -39,11 +39,10 @@ the syntax, but deciding whether it's actually wrong depends on intent and on th
 
 ## Misusing async waiting
 
-The mechanical faults here are all caught deterministically by the linter, so don't
-police them by hand: an empty `waitFor` callback (`no-wait-for-empty-callback`),
-multiple assertions in one callback (`no-wait-for-multiple-assertions`), a side
-effect fired inside the retry loop (`no-wait-for-side-effects`), or a `waitFor` that
-should just be a `findBy*` (`prefer-find-by`).
+The mechanical faults here — an empty `waitFor` callback, multiple assertions in one
+callback, a side effect fired inside the retry loop, or a `waitFor` that should just
+be a `findBy*` — are all caught deterministically by the linter, so don't police them
+by hand.
 
 The part that's *yours* is what you wait **on**: act once, then await the single
 observable change a user would actually perceive — the appeared text, the removed

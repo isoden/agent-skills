@@ -9,29 +9,13 @@ guidance cannot compete with that for rules that are truly black-and-white.
 
 ## What the linter owns (do not re-teach these as judgment)
 
-The plugin ships framework-specific recommended configs. Representative rules and
-the class of mistake each one catches:
-
-- **Async correctness** — `await-async-queries`, `await-async-utils`,
-  `await-async-events`, `no-await-sync-queries`, `no-promise-in-fire-event`.
-  Forgetting to `await` a `findBy*`/`waitFor`, or awaiting something synchronous.
-- **`waitFor` hygiene** — `no-wait-for-empty-callback`,
-  `no-wait-for-multiple-assertions`, `no-wait-for-side-effects`,
-  `no-wait-for-snapshot`. Empty callbacks, multiple assertions, side effects, or
-  snapshots inside a `waitFor` retry loop — all detectable from syntax.
-- **Query hygiene** — `prefer-screen-queries` (use `screen` over destructured
-  queries), `prefer-find-by` (use `findBy*` instead of `waitFor` + `getBy*`),
-  `prefer-presence-queries`, `prefer-query-by-disappearance`,
-  `prefer-query-matchers`.
-- **Don't reach into the DOM** — `no-node-access`, `no-container`. Discourages
-  `container.querySelector` and traversing DOM nodes directly.
-- **Imports & setup** — `no-dom-import` (import from the framework package, not the
-  low-level DOM package), `no-manual-cleanup`, `no-render-in-lifecycle`,
-  `no-unnecessary-act`.
-- **Interaction** — `prefer-user-event` (prefer `user-event` over `fireEvent`).
-- **Debug leftovers** — `no-debugging-utils` (stray `screen.debug()`,
-  `logRoles`, etc.).
-- **Naming** — `render-result-naming-convention`, `consistent-data-testid`.
+Anything decidable from the syntax tree alone — async/`await` correctness,
+`waitFor` hygiene, query hygiene (`screen` vs. destructuring, `findBy*` vs.
+`waitFor`+`getBy*`), not reaching into the DOM, import/setup conventions,
+`fireEvent`-vs-`user-event`, debug leftovers, naming. These are enforced
+automatically by the plugin's framework-specific recommended config; the
+always-current rule list lives upstream (linked below), so this skill does not
+enumerate or describe individual rules — they would only rot and duplicate it.
 
 If you find yourself wanting to write "always await `findBy`" or "use `screen`
 instead of destructuring," stop — that belongs to the linter, not to this skill.

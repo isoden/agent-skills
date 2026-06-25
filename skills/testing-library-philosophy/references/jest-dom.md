@@ -59,8 +59,8 @@ Some matchers pair with `queryBy*`, not `getBy*`. To assert that something is *n
 present, query with `queryBy*` (which returns `null`) and assert
 `expect(thing).not.toBeInTheDocument()`. You can't express absence with `getBy*`
 because it throws before your assertion runs. (Which variant to use is a deterministic
-concern the linter helps with via `prefer-presence-queries`; the *intent* — proving
-absence vs. presence — is yours to get right.)
+concern the linter helps with; the *intent* — proving absence vs. presence — is yours
+to get right.)
 
 ## Don't assert nothing
 
@@ -79,24 +79,10 @@ the jest-dom companion to `eslint-plugin-testing-library`. Recommend adopting it
 alongside the main plugin so this skill can focus on *which* fact to assert, while
 the linter enforces *how* to phrase it.
 
-What it catches (most rules are auto-fixable):
-
-- `prefer-in-document` — `toBeInTheDocument()` instead of `toHaveLength(1)` /
-  `not.toBeNull()` style presence checks.
-- `prefer-to-have-text-content` — `toHaveTextContent()` instead of asserting on
-  `.textContent`.
-- `prefer-to-have-value` — `toHaveValue()` instead of asserting on `.value`.
-- `prefer-to-have-attribute` — `toHaveAttribute()` instead of `getAttribute()`
-  comparisons.
-- `prefer-to-have-class` — `toHaveClass()` instead of inspecting `className`.
-- `prefer-to-have-style` — `toHaveStyle()` instead of reading `.style`.
-- `prefer-enabled-disabled` — `toBeEnabled()` / `toBeDisabled()` instead of
-  asserting on the `disabled` property.
-- `prefer-checked` — `toBeChecked()` instead of asserting on `checked`.
-- `prefer-required` — `toBeRequired()` instead of asserting on `required`.
-- `prefer-empty` — `toBeEmptyDOMElement()` instead of empty-content checks.
-- `prefer-focus` — `toHaveFocus()` instead of comparing against
-  `document.activeElement`.
+Most of its `prefer-*` rules are auto-fixable: they recognize a raw-property
+assertion that reimplements a matcher by hand and rewrite it into the semantic
+matcher. The current rule list lives upstream (linked above), so this skill does
+not enumerate it — the descriptions would only rot and duplicate the source.
 
 Setup (flat config) — enable both plugins together:
 
@@ -115,7 +101,7 @@ export default [
 ]
 ```
 
-Because most of these rules autofix, adopting the plugin retroactively cleans up a
+Because the fixes apply automatically, adopting the plugin retroactively cleans up a
 codebase's raw-property assertions in one pass — leaving this skill's prose to cover
 the genuine judgment: *which* matcher captures the behavior you actually care about.
 
