@@ -38,16 +38,6 @@ skills/testing-library-philosophy/
     └── further-reading.md                    出典リンク集
 ```
 
-### `skill-ab-eval`（プロジェクト専用ツール）
-
-スキルが実際にエージェントの挙動を変えるかを A/B で検証するツールです（`.claude/skills/skill-ab-eval`）。
-
-- スキルなしの control 群と、スキルありの treatment 群に同一タスクを解かせる
-- 出力を群を伏せてブラインド採点し、control と treatment を比較する
-- スキルの価値は多くの場合「平均の底上げ」ではなく「悪い出力に転落する確率（regression）の低下」に出るため、回帰率を重視する
-
-Claude Code 上で `/skill-ab-eval`、または「このスキルの有用性をチェックして」と依頼すると起動します。
-
 ## ライセンス
 
 このリポジトリは [MIT License](./LICENSE)）で公開しています。
