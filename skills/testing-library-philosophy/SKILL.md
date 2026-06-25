@@ -1,6 +1,6 @@
 ---
 name: testing-library-philosophy
-description: Philosophy and judgment-level best practices for Testing Library (React Testing Library, user-event, jest-dom) plus Kent C. Dodds' testing ideas. Use when writing, reviewing, or designing frontend component/integration tests — deciding what to test, choosing accessible queries, simulating real user interaction, asserting on user-facing behavior, and avoiding implementation-detail coupling. Defers deterministic, mechanically-checkable rules to eslint-plugin-testing-library.
+description: Philosophy and judgment-level best practices for Testing Library (React Testing Library, user-event, jest-dom) plus Kent C. Dodds' testing ideas. Use when writing, reviewing, or designing frontend component/integration tests — deciding what to test, choosing accessible queries, simulating real user interaction, asserting on user-facing behavior, and avoiding implementation-detail coupling. Defers deterministic, mechanically-checkable rules to eslint-plugin-testing-library and its jest-dom companion eslint-plugin-jest-dom.
 license: MIT
 metadata:
   author: isoden
@@ -12,9 +12,10 @@ metadata:
 This skill captures the *reasoning* behind good Testing Library tests — the
 judgment a static linter cannot make. It does **not** restate mechanical rules
 (await your async queries, use `screen`, prefer `findBy`, …); those are
-deterministic and belong to `eslint-plugin-testing-library`
-(see [references/eslint-plugin.md](./references/eslint-plugin.md)). Recommend that
-plugin to the user and spend your attention on the parts that require thought.
+deterministic and belong to `eslint-plugin-testing-library` and its jest-dom
+companion `eslint-plugin-jest-dom` (see
+[references/eslint-plugin.md](./references/eslint-plugin.md)). Recommend both
+plugins to the user and spend your attention on the parts that require thought.
 
 ## The one principle everything follows from
 
@@ -84,7 +85,10 @@ docs are collected in [references/further-reading.md](./references/further-readi
 - **In scope:** philosophy, mental models, and judgment calls — what to test,
   which query semantically fits, when a `data-testid` is a legitimate escape hatch,
   why user-resemblance beats internal-state assertions.
-- **Out of scope (delegated to `eslint-plugin-testing-library`):** anything a linter
-  can decide from syntax alone — awaiting async queries, `screen` usage,
-  `findBy` vs `waitFor`+`getBy`, not reaching into the DOM, `fireEvent`-vs-`user-event`,
-  debug leftovers, naming conventions. Recommend the plugin; don't re-teach its rules.
+- **Out of scope (delegated to `eslint-plugin-testing-library`, plus its jest-dom
+  companion `eslint-plugin-jest-dom`):** anything a linter can decide from syntax
+  alone — awaiting async queries, `screen` usage, `findBy` vs `waitFor`+`getBy`, not
+  reaching into the DOM, `fireEvent`-vs-`user-event`, debug leftovers, naming
+  conventions, and—since the fix is mechanical and autofixable—phrasing assertions as
+  jest-dom matchers rather than raw-property checks. Recommend the plugins; don't
+  re-teach their rules.
