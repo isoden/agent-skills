@@ -39,28 +39,20 @@ the syntax, but deciding whether it's actually wrong depends on intent and on th
 
 ## Misusing async waiting
 
-These are about *what you put inside the wait*, which is a reasoning call:
+The mechanical faults here are all caught deterministically by the linter, so don't
+police them by hand: an empty `waitFor` callback (`no-wait-for-empty-callback`),
+multiple assertions in one callback (`no-wait-for-multiple-assertions`), a side
+effect fired inside the retry loop (`no-wait-for-side-effects`), or a `waitFor` that
+should just be a `findBy*` (`prefer-find-by`).
 
-- **Empty `waitFor` callback.** Waiting "a tick" with nothing asserted is fragile;
-  the condition you're waiting for must live *inside* the callback so `waitFor` knows
-  what success looks like.
-- **Multiple assertions in one `waitFor`.** If an early assertion passes and a later
-  one fails, the block keeps retrying until the full timeout — slow and confusing.
-  Keep the awaited condition focused.
-- **Side effects inside `waitFor`.** The callback runs repeatedly and at
-  non-deterministic times, so firing events or other side effects inside it misfires.
-  Do the action once, then wait on its observable result.
+The part that's *yours* is what you wait **on**: act once, then await the single
+observable change a user would actually perceive — the appeared text, the removed
+spinner — not an internal tick. Choosing that user-facing condition (and keeping the
+awaited assertion focused so a failure points at one thing) is the judgment the
+linter can't make for you.
 
 ```js
-// ❌ Bad — empty callback (waits a tick, asserts nothing), a side effect inside the
-//          retry loop, and a query that should just be a findBy
-await waitFor(() => {})
-await waitFor(() => {
-  fireEvent.click(button)              // side effect re-runs on every retry
-  expect(screen.getByText('Saved')).toBeInTheDocument()
-})
-
-// ✅ Good — act once, then await the single observable condition
+// ✅ Good — act once, then await the one observable condition a user would see
 const user = userEvent.setup()
 await user.click(button)
 expect(await screen.findByText('Saved')).toBeInTheDocument()

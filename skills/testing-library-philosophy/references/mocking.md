@@ -59,7 +59,7 @@ Why this is better than a `fetch` mock:
 ```js
 // ❌ Bad — re-implements the backend in the test; wrong request still "passes"
 global.fetch = jest.fn(() =>
-  Promise.resolve({ json: () => Promise.resolve({ user: { name: 'Ada' } }) }),
+  Promise.resolve({ json: () => Promise.resolve({ name: 'Ada' }) }),
 )
 
 // ✅ Good — MSW intercepts the real request at the network boundary

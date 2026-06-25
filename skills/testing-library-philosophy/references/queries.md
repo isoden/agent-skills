@@ -90,16 +90,6 @@ screen.getByRole('button', { name: /create account/i })
 screen.getByTestId('chart-canvas') // a purely presentational element with no implicit role or accessible name
 ```
 
-```js
-// ❌ Bad — queryBy for a positive existence check (null-deref, unhelpful failure)
-expect(screen.queryByRole('alert')).toBeInTheDocument()
-
-// ✅ Good — getBy throws with a DOM dump when present-check fails;
-//          queryBy only for asserting absence
-expect(screen.getByRole('alert')).toBeInTheDocument()
-expect(screen.queryByRole('alert')).not.toBeInTheDocument()
-```
-
 ## Query variants — pick by intent
 
 Choosing the variant is a statement of intent (whether to await something is the

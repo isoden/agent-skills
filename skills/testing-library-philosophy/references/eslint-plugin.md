@@ -15,6 +15,10 @@ the class of mistake each one catches:
 - **Async correctness** — `await-async-queries`, `await-async-utils`,
   `await-async-events`, `no-await-sync-queries`, `no-promise-in-fire-event`.
   Forgetting to `await` a `findBy*`/`waitFor`, or awaiting something synchronous.
+- **`waitFor` hygiene** — `no-wait-for-empty-callback`,
+  `no-wait-for-multiple-assertions`, `no-wait-for-side-effects`,
+  `no-wait-for-snapshot`. Empty callbacks, multiple assertions, side effects, or
+  snapshots inside a `waitFor` retry loop — all detectable from syntax.
 - **Query hygiene** — `prefer-screen-queries` (use `screen` over destructured
   queries), `prefer-find-by` (use `findBy*` instead of `waitFor` + `getBy*`),
   `prefer-presence-queries`, `prefer-query-by-disappearance`,

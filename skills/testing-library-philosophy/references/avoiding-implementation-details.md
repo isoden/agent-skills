@@ -51,12 +51,15 @@ was coupled to layout, not behavior.
 Consider a counter `<Counter />` that renders a button showing the current count.
 
 ```js
-// ❌ Bad — asserts on internal state. Breaks when you rename `count` to `value`
-//          (false negative), and stays green if the button stops rendering the
-//          state (false positive). Tests a "test user" nobody ships.
-const { result } = renderHook(() => useCounter())
-act(() => result.current.increment())
-expect(result.current.count).toBe(1)
+// ❌ Bad — asserts on global store state (jotai/zustand/redux), an internal the user
+//          never sees. Note the render and click are identical to the good test —
+//          only the assertion target differs. Breaks when the store's shape or key
+//          changes (false negative), and stays green if the UI stops reflecting the
+//          store (false positive). Tests a "test user."
+const user = userEvent.setup()
+render(<Counter />)
+await user.click(screen.getByRole('button'))
+expect(store.get(countAtom)).toBe(1) // reads internal state, not what's on screen
 ```
 
 ```js

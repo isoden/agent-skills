@@ -62,7 +62,9 @@ pushes you toward brittle, isolated unit tests. Instead:
 //          form never submits. Optimizes code coverage, not use-case coverage.
 jest.mock('./SubmitButton')
 render(<LoginForm onSubmit={onSubmit} />)
-expect(SubmitButton).toHaveBeenCalledWith({ disabled: true }, expect.anything())
+expect(SubmitButton).toHaveBeenCalledWith(
+  expect.objectContaining({ disabled: true }),
+)
 
 // ✅ Good — integration test of the real use case, through the user-facing surface.
 //          Covers "a user can log in" end-to-end across the composed components.
