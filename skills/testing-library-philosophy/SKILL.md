@@ -1,6 +1,10 @@
 ---
 name: testing-library-philosophy
 description: Philosophy and judgment-level best practices for Testing Library (React Testing Library, user-event, jest-dom) plus Kent C. Dodds' testing ideas. Use when writing, reviewing, or designing frontend component/integration tests — deciding what to test, choosing accessible queries, simulating real user interaction, asserting on user-facing behavior, and avoiding implementation-detail coupling. Defers deterministic, mechanically-checkable rules to eslint-plugin-testing-library.
+license: MIT
+metadata:
+  author: isoden
+  version: "0.1.0"
 ---
 
 # Testing Library Philosophy
